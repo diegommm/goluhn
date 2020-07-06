@@ -12,15 +12,22 @@
 //
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <https://www.gnu.org/licenses/>.
-//
 
+//
+// This package efficiently implements the Luhn Algorithm
+//
 package goluhn
 
+// LuhnValidate returns whether the supplied string represents a valid string of
+// digits validated with the Luhn Algorithm by the rightmost digit
 func LuhnValidate(str string) bool {
 	l := len(str) - 1
 	return l > 0 && LuhnChecksum(str[:l]) == str[l:]
 }
 
+// LuhnChecksum calculates the Luhn verification digit fot a string containing a
+// series of digits. If the string contains any non-digit character it returns
+// an empty string
 func LuhnChecksum(str string) string {
 	var sum uint
 	p := ^len(str) & 0x1
